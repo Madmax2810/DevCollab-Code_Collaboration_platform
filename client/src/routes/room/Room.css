@@ -1,0 +1,199 @@
+body {
+    background-image: url(Homepage_bg.jpg);
+}
+
+.room {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 100vh;
+    padding: 10px 10px 20px;
+}
+
+/* Header styles */
+.header {
+    padding: 10px;
+    /* Padding */
+    display: flex;
+    /* Use flexbox */
+    justify-content: space-between;
+    /* Space items evenly */
+    align-items: center;
+    /* Center items vertically */
+}
+
+.Navleft {
+    display: flex;
+    /* Use flexbox */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: flex-start;
+    /* Align items to the left */
+}
+
+.Navleft div {
+    color: white;
+    /* Text color */
+    font-size: 24px;
+    /* Font size */
+    font-weight: bold;
+    /* Bold text */
+}
+
+.Navright {
+    display: flex;
+    /* Use flexbox */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: flex-end;
+    /* Align items to the right */
+}
+
+.Navright ul {
+    list-style-type: none;
+    /* Remove list bullets */
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+}
+
+.Navright ul li {
+    display: inline-block;
+    /* Display list items inline */
+    margin-left: 20px;
+    /* Margin between list items */
+}
+
+.Navright ul li a {
+    text-decoration: none;
+    /* Remove underline from links */
+    color: white;
+    /* Link color */
+}
+
+.Navright ul li a:hover {
+    text-decoration: underline;
+    /* Underline link on hover */
+}
+
+
+#C_users {
+    color: #ffffff;
+}
+
+.roomSidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.languageFieldWrapper {
+    color: #ffffff;
+    padding: 2px 6px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.languageField {
+    padding: 6px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+}
+
+.roomCodeEditor {
+    flex: 1;
+}
+
+.roomSidebarCopyBtn {
+    font-size: 75%;
+    font-weight: bold;
+    padding: 8px 15px;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.45s ease-in-out 0.05s;
+}
+
+.roomSidebarCopyBtn:hover {
+    color: rgb(0, 0, 0);
+    background-color: white;
+}
+
+.roomSidebarBtn {
+    font-size: 75%;
+    font-weight: bold;
+    padding: 10px 15px;
+    background-color: white;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.45s ease-in-out 0.05s;
+}
+
+.roomSidebarBtn:hover {
+    color: white;
+    background-color: black;
+}
+
+.roomSidebarUsersWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.roomSidebarUsers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.roomSidebarUsersEach {
+    display: grid;
+    justify-items: center;
+}
+
+.roomSidebarUsersEachAvatar {
+    color: white;
+    border-radius: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 5px;
+    font-size: small;
+
+    display: grid;
+    place-items: center;
+}
+
+.roomSidebarUsersEachName {
+    font-weight: bold;
+    font-size: small;
+}
+
+/* Navbar styles */
+
+
+@media screen and (min-width: 991px) {
+    .room {
+        flex-direction: row;
+    }
+
+    .roomSidebar {
+        flex: 0.25;
+    }
+
+    .roomSidebar>*:nth-child(2) {
+        margin-top: auto;
+    }
+
+    .roomCodeEditor {
+        flex: 0.75;
+    }
+}
