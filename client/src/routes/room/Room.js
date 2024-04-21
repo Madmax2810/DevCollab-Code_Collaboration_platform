@@ -6,12 +6,15 @@ import { generateColor } from "../../utils";
 import './Room.css'
 
 import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/mode-typescript";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
-
+import "ace-builds/src-noconflict/mode-c_cpp";    
+import "ace-builds/src-noconflict/mode-csharp"; 
+import "ace-builds/src-noconflict/mode-php"; 
+import "ace-builds/src-noconflict/mode-kotlin"; 
+import "ace-builds/src-noconflict/mode-rust"; 
 
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -25,8 +28,8 @@ export default function Room({ socket }) {
   const [language, setLanguage] = useState(() => "javascript")
   const [codeKeybinding, setCodeKeybinding] = useState(() => undefined)
 
-  const languagesAvailable = ["javascript", "java", "python", "typescript", "html"]
-  // const codeKeybindingsAvailable = ["default", "emacs", "vim"]
+  const languagesAvailable = ["javascript", "java", "python", "html", "c", "c++", "csharp", "php", "kotlin", "rust"]
+  // Remove TypeScript from the array
 
   function onChange(newValue) {
     setFetchedCode(newValue)
@@ -49,7 +52,16 @@ export default function Room({ socket }) {
     !socket.connected && navigate('/', { replace: true, state: {} })
   }
 
-  function copyToClipboard(text) {
+  function copyCodeToClipboard(text) {
+    try {
+      navigator.clipboard.writeText(text);
+      toast.success('Code Copied')
+    } catch (exp) {
+      console.error(exp)
+    }
+  }
+
+  function copyRoomIdToClipboard(text) {
     try {
       navigator.clipboard.writeText(text);
       toast.success('Room ID copied')
@@ -93,17 +105,17 @@ export default function Room({ socket }) {
 
   return (
     <div>
-    <header className="header">
-      <div className="Navleft">
-        <div>DevCollab</div>
-      </div>
-      <div className="Navright">
-        <ul className="navbar">
-          <li><a href="Homepage.html" className="Active">Home</a></li>
-          <li><a href="Aboutus.html">About Us</a></li>
-        </ul>
-      </div>
-    </header>
+      <header className="header">
+        <div className="Navleft">
+          <div>DevCollab</div>
+        </div>
+        <div className="Navright">
+          <ul className="navbar">
+            <li><a href="Homepage.html" className="Active">Home</a></li>
+            <li><a href="Aboutus.html">About Us</a></li>
+          </ul>
+        </div>
+      </header>
   
       <div className="room">
         <div className="roomSidebar">
@@ -127,7 +139,9 @@ export default function Room({ socket }) {
             </div>
           </div>
   
-          <button className="roomSidebarCopyBtn" onClick={() => { copyToClipboard(roomId) }}>Copy Room id</button>
+          <button className="roomSidebarCopyBtn" onClick={() => window.open("https://www.onlinegdb.com/", "_blank")}>Open Compiler</button>
+          <button className="roomSidebarCopyBtn" onClick={() => { copyCodeToClipboard(fetchedCode) }}>Copy Code</button>
+          <button className="roomSidebarCopyBtn" onClick={() => { copyRoomIdToClipboard(roomId) }}>Copy Room id</button>
           <button className="roomSidebarBtn" onClick={() => { handleLeave() }}>Leave</button>
         </div>
   
@@ -156,5 +170,5 @@ export default function Room({ socket }) {
       </div>
       <Toaster />
     </div>
-  )  
+  )
 }
