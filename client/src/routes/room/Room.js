@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate, useParams } from "react-router-dom";
 import { generateColor } from "../../utils";
 import './Room.css'
 
+// Import Ace Editor themes
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-twilight";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-solarized_light";
+
+// Import Ace Editor language modes
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-java";
@@ -16,10 +23,6 @@ import "ace-builds/src-noconflict/mode-php";
 import "ace-builds/src-noconflict/mode-kotlin"; 
 import "ace-builds/src-noconflict/mode-rust"; 
 
-import "ace-builds/src-noconflict/theme-monokai";
-import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/ext-searchbox";
-
 export default function Room({ socket }) {
   const navigate = useNavigate()
   const { roomId } = useParams()
@@ -27,9 +30,9 @@ export default function Room({ socket }) {
   const [fetchedCode, setFetchedCode] = useState(() => "")
   const [language, setLanguage] = useState(() => "javascript")
   const [codeKeybinding, setCodeKeybinding] = useState(() => undefined)
+  const [theme, setTheme] = useState(() => "monokai"); // Default theme
 
-  const languagesAvailable = ["javascript", "java", "python", "html", "c", "c++", "csharp", "php", "kotlin", "rust"]
-  // Remove TypeScript from the array
+  const languagesAvailable = ["javascript", "java", "python", "html", "c", "c++", "c#", "php", "kotlin", "rust"];
 
   function onChange(newValue) {
     setFetchedCode(newValue)
@@ -68,6 +71,11 @@ export default function Room({ socket }) {
     } catch (exp) {
       console.error(exp)
     }
+  }
+
+  // Function to handle theme change
+  function handleThemeChange(selectedTheme) {
+    setTheme(selectedTheme);
   }
 
   useEffect(() => {
@@ -121,10 +129,21 @@ export default function Room({ socket }) {
         <div className="roomSidebar">
           <div className="roomSidebarUsersWrapper">
             <div className="languageFieldWrapper">
+              <span>Programming Language:</span>
               <select className="languageField" name="language" id="language" value={language} onChange={handleLanguageChange}>
                 {languagesAvailable.map(eachLanguage => (
                   <option key={eachLanguage} value={eachLanguage}>{eachLanguage}</option>
                 ))}
+              </select>
+            </div>
+
+            <div className="languageFieldWrapper">
+              <span>Theme:</span>
+              <select className="languageField" name="theme" id="theme" value={theme} onChange={(e) => handleThemeChange(e.target.value)}>
+                <option value="monokai">Default</option>
+                <option value="twilight">Black</option>
+                <option value="solarized_dark">Blue</option>
+                <option value="solarized_light">Beige</option>
               </select>
             </div>
   
@@ -150,7 +169,7 @@ export default function Room({ socket }) {
           className="roomCodeEditor"
           mode={language}
           keyboardHandler={codeKeybinding}
-          theme="monokai"
+          theme={theme} // Set the theme based on the selected theme
           name="collabEditor"
           width="auto"
           height="auto"

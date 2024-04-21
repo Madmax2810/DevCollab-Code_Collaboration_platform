@@ -89,11 +89,26 @@ body {
 }
 
 .languageFieldWrapper {
-    color: #ffffff;
     padding: 2px 6px;
     background-color: #f0f0f0;
     border-radius: 5px;
+    
 }
+
+.languageFieldWrapper select {
+    padding: 6px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+    color: black; /* Set text color to black */
+}
+
+.languageFieldWrapper span {
+    color: black; /* Set text color to black */
+    
+}
+
 
 .languageField {
     padding: 6px 10px;
