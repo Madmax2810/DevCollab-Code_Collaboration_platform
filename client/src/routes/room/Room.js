@@ -78,6 +78,16 @@ export default function Room({ socket }) {
     setTheme(selectedTheme);
   }
 
+  // Function to download code as .txt file
+  function downloadCodeAsTxt() {
+    const element = document.createElement("a");
+    const file = new Blob([fetchedCode], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = "code.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
   useEffect(() => {
     socket.on("updating client list", ({ userslist }) => {
       setFetchedUsers(userslist)
@@ -161,6 +171,7 @@ export default function Room({ socket }) {
           <button className="roomSidebarCopyBtn" onClick={() => window.open("https://www.onlinegdb.com/", "_blank")}>Open Compiler</button>
           <button className="roomSidebarCopyBtn" onClick={() => { copyCodeToClipboard(fetchedCode) }}>Copy Code</button>
           <button className="roomSidebarCopyBtn" onClick={() => { copyRoomIdToClipboard(roomId) }}>Copy Room id</button>
+          <button className="roomSidebarCopyBtn" onClick={() => { downloadCodeAsTxt() }}>Download Code</button>
           <button className="roomSidebarBtn" onClick={() => { handleLeave() }}>Leave</button>
         </div>
   
@@ -169,7 +180,7 @@ export default function Room({ socket }) {
           className="roomCodeEditor"
           mode={language}
           keyboardHandler={codeKeybinding}
-          theme={theme} // Set the theme based on the selected theme
+          theme={theme}
           name="collabEditor"
           width="auto"
           height="auto"
