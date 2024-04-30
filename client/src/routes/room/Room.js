@@ -188,7 +188,7 @@ export default function Room({ socket }) {
           height="auto"
           value={fetchedCode}
           onChange={onChange}
-          fontSize={15}
+          fontSize={16}
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
