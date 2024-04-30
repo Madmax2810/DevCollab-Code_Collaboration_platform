@@ -55,6 +55,7 @@ export default function Room({ socket }) {
     !socket.connected && navigate('/', { replace: true, state: {} })
   }
 
+  //Function to Copy Code
   function copyCodeToClipboard(text) {
     try {
       navigator.clipboard.writeText(text);
@@ -64,6 +65,7 @@ export default function Room({ socket }) {
     }
   }
 
+  //Function to Copy RoomID
   function copyRoomIdToClipboard(text) {
     try {
       navigator.clipboard.writeText(text);
@@ -84,7 +86,7 @@ export default function Room({ socket }) {
     const file = new Blob([fetchedCode], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = "code.txt";
-    document.body.appendChild(element); // Required for this to work in FireFox
+    document.body.appendChild(element); 
     element.click();
   }
 
