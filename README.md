@@ -22,11 +22,9 @@ DevCollab is a real-time collaborative coding platform that allows multiple deve
 1. Clone the repository to your local machine.
 2. Install dependencies using `npm install`.
 3. Start the server by running `npm start` in the root directory.
-4. Access the application in your web browser at `http://localhost:3000`.
+4. Start the client by running `npm start` in the root directory.
+5. Access the application in your web browser at `http://localhost:3000`.
 
-## Contributing
-
-Contributions are welcome! If you have any suggestions, enhancements, or bug fixes, feel free to open an issue or create a pull request.
 
 ## License
 
