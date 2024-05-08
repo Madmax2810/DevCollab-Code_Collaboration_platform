@@ -1,1 +1,2 @@
-Mini Project For SEM 4
+Code Collaboration Platform website 
+
